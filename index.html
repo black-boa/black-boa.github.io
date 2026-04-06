@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Secretaría de Pesca y Acuacultura del Pueblo — Chiapas</title>
+        <meta
+            name="description"
+            content="Sitio oficial de la Secretaría de Pesca y Acuacultura del Pueblo del Estado de Chiapas."
+        />
+
+        <!-- Favicon: escudo institucional -->
+        <link
+            rel="icon"
+            type="image/png"
+            href="assets/img/logos/logo-blanco.png"
+        />
+
+        <!-- Bootstrap 5 CSS -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        />
+
+        <!-- Bootstrap Icons -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        />
+
+        <!-- Estilos propios -->
+        <link rel="stylesheet" href="assets/css/styles.css" />
+    </head>
+    <body>
+        <!-- ════════════════════════════════════════════════════════
+             1. TOPBAR GOBIERNO
+             Barra superior con marca chiapas.gob.mx, links de
+             gobierno y botón hamburguesa para móvil.
+        ════════════════════════════════════════════════════════ -->
+        <nav id="topbar-gob" aria-label="Barra de gobierno">
+            <div class="topbar-inner">
+                <!-- Marca: escudo + dominio -->
+                <a
+                    class="topbar-brand"
+                    href="https://www.chiapas.gob.mx/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="assets/img/logos/logo-blanco.png"
+                        alt="Escudo Oficial de Chiapas"
+                    />
+                    <span class="topbar-brand-text">chiapas.gob.mx</span>
+                </a>
+
+                <!-- Acciones: links + búsqueda + hamburguesa -->
+                <div class="topbar-actions">
+                    <!-- Links de gobierno (ocultos en móvil) -->
+                    <div class="topbar-links" id="topbar-links">
+                        <a
+                            href="https://chiapas.gob.mx/servicios-por-entidad/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Trámites</a
+                        >
+                        <a
+                            href="https://chiapas.gob.mx/gobierno/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Gobierno</a
+                        >
+                        <a
+                            href="https://chiapas.gob.mx/participa/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Participa</a
+                        >
+                        <a
+                            href="https://oficinadelgobernador.transparencia.chiapas.gob.mx/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Transparencia</a
+                        >
+                    </div>
+
+                    <!-- Icono de búsqueda (enlaza a chiapas.gob.mx/busquedas) -->
+                    <a
+                        href="https://chiapas.gob.mx/busquedas/"
+                        class="topbar-search"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Buscar en chiapas.gob.mx"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="2.5"
+                            stroke="currentColor"
+                            width="20"
+                            height="20"
+                            aria-hidden="true"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                            />
+                        </svg>
+                    </a>
+
+                    <!-- Botón hamburguesa (visible solo en móvil, activa topbar-links) -->
+                    <button
+                        class="topbar-hamburger"
+                        type="button"
+                        aria-label="Abrir menú de gobierno"
+                        aria-expanded="false"
+                        aria-controls="topbar-links"
+                        id="topbar-toggle"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            width="28"
+                            height="28"
+                            aria-hidden="true"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                            />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ════════════════════════════════════════════════════════
+             2. BANNER PRINCIPAL
+             Imagen institucional de cabecera de la dependencia.
+        ════════════════════════════════════════════════════════ -->
+        <div id="banner">
+            <img
+                src="assets/img/banners/banner_spyap.jpg"
+                alt="Banner Institucional SPyAP"
+            />
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════
+             3. NAVBAR PRINCIPAL (Bootstrap 5)
+             Menú de navegación con nombre de la dependencia,
+             links de sección y dropdown de Transparencia.
+        ════════════════════════════════════════════════════════ -->
+        <nav class="navbar navbar-expand-lg navbar-b001">
+            <div class="container">
+                <!-- Nombre de la dependencia (enlace a inicio) -->
+                <a class="navbar-brand" href="index.html"
+                    >SECRETARÍA DE PESCA Y ACUACULTURA DEL PUEBLO</a
+                >
+
+                <!-- Botón colapso para pantallas pequeñas -->
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navMain"
+                    aria-controls="navMain"
+                    aria-expanded="false"
+                    aria-label="Abrir menú"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Ítems de navegación -->
+                <div class="collapse navbar-collapse" id="navMain">
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Enlace: Conócenos -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="conocenos.html"
+                                >Conócenos</a
+                            >
+                        </li>
+
+                        <!-- Dropdown: Directorio -->
+                        <li class="nav-item dropdown">
+                            <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                >Directorio</a
+                            >
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        href="https://chiapas.gob.mx/funcionarios/estatal/ejecutivo/secretaria-acuacultura"
+                                        >Directorio</a
+                                    >
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""
+                                        >Organigrama</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Dropdown: Transparencia -->
+                        <li class="nav-item dropdown">
+                            <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                >Transparencia</a
+                            >
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        href="https://www.gob.mx/agn"
+                                        >Archivo General de la Nacion</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        href="https://snt.org.mx/"
+                                        >Sistema Nacional de Transparencia</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        href="https://www.plataformadetransparencia.org.mx/Inicio"
+                                        >Plataforma Transparencia</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        href="https://www.datos.gob.mx/"
+                                        >Datos Abiertos</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        href="https://consultapublicamx.plataformadetransparencia.org.mx/vut-web/faces/view/consultaPublica.xhtml?idEntidad=Nw==&idOrgano=Nw==&idSujetoObligado=MjA0NDQ=#obligaciones"
+                                        >INAI</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ════════════════════════════════════════════════════════
+             4. CONTENIDO PRINCIPAL
+        ════════════════════════════════════════════════════════ -->
+        <main>
+            <div id="contenido-principal">
+                <!-- ════════════════════════════════════════════════════════
+                     A. VIDEO
+                     Sección con video institucional embebido.
+                ════════════════════════════════════════════════════════ -->
+                <section id="seccion-video" class="container mb-5">
+                    <div class="seccion-divisor"></div>
+                    <div
+                        class="d-flex justify-content-center align-items-center"
+                    >
+                        <div class="video-wrapper">
+                            <div class="ratio ratio-video">
+                                <video
+                                    id="video-inicio"
+                                    autoplay
+                                    muted
+                                    loop
+                                    playsinline
+                                    controls
+                                >
+                                    <source
+                                        src="videoinicio.mp4"
+                                        type="video/mp4"
+                                    />
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════════════════════════
+                     C. CARRUSEL
+                     Slider automático de imágenes (Bootstrap Carousel),
+                     con indicadores y controles prev/next.
+                ════════════════════════════════════════════════════════ -->
+                <section id="seccion-carrusel" class="container mb-5">
+                    <div class="seccion-titulo text-center">
+                        <h2>INFORMACION DESTACADA</h2>
+                    </div>
+                    <div
+                        id="carrusel-boletines"
+                        class="carousel slide"
+                        data-bs-ride="carousel"
+                        data-bs-interval="4000"
+                    >
+                        <!-- Indicadores de posición (puntos) -->
+                        <div class="carousel-indicators">
+                            <button
+                                type="button"
+                                data-bs-target="#carrusel-boletines"
+                                data-bs-slide-to="0"
+                                class="active"
+                                aria-current="true"
+                                aria-label="Diapositiva 1"
+                            ></button>
+                            <button
+                                type="button"
+                                data-bs-target="#carrusel-boletines"
+                                data-bs-slide-to="1"
+                                aria-label="Diapositiva 2"
+                            ></button>
+                            <button
+                                type="button"
+                                data-bs-target="#carrusel-boletines"
+                                data-bs-slide-to="2"
+                                aria-label="Diapositiva 3"
+                            ></button>
+                            <button
+                                type="button"
+                                data-bs-target="#carrusel-boletines"
+                                data-bs-slide-to="3"
+                                aria-label="Diapositiva 4"
+                            ></button>
+                            <button
+                                type="button"
+                                data-bs-target="#carrusel-boletines"
+                                data-bs-slide-to="4"
+                                aria-label="Diapositiva 5"
+                            ></button>
+                        </div>
+
+                        <!-- Diapositivas -->
+                        <div class="carousel-inner">
+                            <div class="texto-fijo-carousel">
+                                <p class="m-0">
+                                    La ERA de la PESCA y la ACUACULTURA en
+                                    CHIAPAS
+                                </p>
+                            </div>
+
+                            <div class="carousel-item active">
+                                <img
+                                    src="assets/img/slider/slider1.jpg"
+                                    class="d-block w-100"
+                                    alt="Manual de Identidad"
+                                />
+                            </div>
+                            <div class="carousel-item">
+                                <img
+                                    src="assets/img/slider/slider2.jpg"
+                                    class="d-block w-100"
+                                    alt="Consulta Ciudadana"
+                                />
+                            </div>
+                            <div class="carousel-item">
+                                <img
+                                    src="assets/img/slider/slider3.jpg"
+                                    class="d-block w-100"
+                                    alt="Declara Chiapas 2026"
+                                />
+                            </div>
+                            <div class="carousel-item">
+                                <img
+                                    src="assets/img/slider/slider4.jpg"
+                                    class="d-block w-100"
+                                    alt="Imagen de ejemplo 4"
+                                />
+                            </div>
+                            <div class="carousel-item">
+                                <img
+                                    src="assets/img/slider/slider5.jpg"
+                                    class="d-block w-100"
+                                    alt="Imagen de ejemplo 5"
+                                />
+                            </div>
+                        </div>
+
+                        <!-- Control: diapositiva anterior -->
+                        <button
+                            class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#carrusel-boletines"
+                            data-bs-slide="prev"
+                        >
+                            <span
+                                class="carousel-control-prev-icon"
+                                aria-hidden="true"
+                            ></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+
+                        <!-- Control: diapositiva siguiente -->
+                        <button
+                            class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#carrusel-boletines"
+                            data-bs-slide="next"
+                        >
+                            <span
+                                class="carousel-control-next-icon"
+                                aria-hidden="true"
+                            ></span>
+                            <span class="visually-hidden">Siguiente</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════════════════════════
+                     D. NOTAS / TARJETAS
+                     Tres tarjetas con información destacada de la
+                     dependencia (Manual, Consulta Ciudadana, Declara).
+                ════════════════════════════════════════════════════════ -->
+                <section id="seccion-tarjetas" class="container mb-5">
+                    <div class="seccion-titulo text-center">
+                        <h2>BOLETINES INFORMATIVOS</h2>
+                    </div>
+                    <div class="row g-4">
+                        <!-- Tarjeta: Nota 1 -->
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <div class="card-item">
+                                <img
+                                    class="card-img-top"
+                                    src="assets/img/notas/n1a.jpg"
+                                    alt="Nota 1"
+                                />
+                                <div class="card-body">
+                                    <h3>
+                                        Entregan 70 mil crías de tilapia a
+                                        productores acuícolas en El Parral,
+                                        Chiapas.
+                                    </h3>
+                                    <p>
+                                        El Parral, Chiapas.– En seguimiento a la
+                                        instrucción del gobernador Eduardo
+                                        Ramírez y a las indicaciones de...
+                                    </p>
+                                    <a
+                                        class="btn-ver"
+                                        href="assets/newsletters/nota1.html"
+                                        >Ver más información</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta: Nota 2 -->
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <div class="card-item">
+                                <img
+                                    class="card-img-top"
+                                    src="assets/img/notas/n2a.jpg"
+                                    alt="Nota 2"
+                                />
+                                <div class="card-body">
+                                    <h3>
+                                        Supervisan avances en desazolve y
+                                        dragado del sistema lagunario en la
+                                        Costa y Soconusco.
+                                    </h3>
+                                    <p>
+                                        Chiapas.– Como parte de las acciones
+                                        para el fortalecimiento del sector
+                                        pesquero en la entidad, el Gobierno del
+                                        Estado...
+                                    </p>
+                                    <a
+                                        class="btn-ver"
+                                        href="assets/newsletters/nota2.html"
+                                        >Ver más información</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta: Nota 3 -->
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <div class="card-item">
+                                <img
+                                    class="card-img-top"
+                                    src="assets/img/notas/n3a.jpg"
+                                    alt="Nota 3"
+                                />
+                                <div class="card-body">
+                                    <h3>
+                                        Impulsan en San Juan Chamula acciones
+                                        contra la violencia digital y promueven
+                                        la Ley Olimpia.
+                                    </h3>
+                                    <p>
+                                        San Juan Chamula, Chiapas.– En el marco
+                                        de las acciones para prevenir y
+                                        erradicar la violencia digital, la
+                                        secretaria de...
+                                    </p>
+                                    <a
+                                        class="btn-ver"
+                                        href="assets/newsletters/nota3.html"
+                                        >Ver más información</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════════════════════════
+                     E. FONDO PARALLAX
+                     Sección decorativa con imagen de fondo fija,
+                     logo de la dependencia y lema institucional.
+                ════════════════════════════════════════════════════════ -->
+                <section id="seccion-parallax" style="margin-bottom: 48px">
+                    <!-- Capa de imagen fija (efecto parallax) -->
+                    <div class="parallax-inner"></div>
+                    <!-- Capa de contenido (sobre la imagen) -->
+                    <div class="parallax-content">
+                        <img
+                            src="assets/img/logos/logo-pesca.png"
+                            alt="Logo SPyAP"
+                        />
+                        <!--    <h1>HUMANISMO QUE TRANSFORMA</h1> -->
+                    </div>
+                </section>
+            </div>
+            <!-- ════════════════════════════════════════════════════════
+                 CARRUSEL DE DOCUMENTOS
+            ════════════════════════════════════════════════════════ -->
+            <section id="seccion-banner-declaracion" class="container mb-5">
+                <div class="row">
+                    <div class="col-12">
+                        <a
+                            href="https://anticorrupcionybg.gob.mx/declarachiapas/"
+                            target="_blank"
+                            class="banner-link"
+                        >
+                            <div
+                                class="banner-wrapper shadow-sm rounded-3 overflow-hidden"
+                            >
+                                <img
+                                    src="assets/img/banners/declara.jpeg"
+                                    alt="Cero Corrupción con tu declaración 2026"
+                                    class="img-fluid w-100 d-block"
+                                />
+                                <div class="banner-overlay">
+                                    <span>Haga clic para más información</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <!-- /contenido-principal -->
+        </main>
+
+        <!-- ════════════════════════════════════════════════════════
+             5. FOOTER
+             Pie de página con logo, navegación, contacto,
+             datos del gobernador y redes sociales.
+        ════════════════════════════════════════════════════════ -->
+        <footer id="footer-principal">
+            <div class="container footer-wrap py-5">
+                <div class="row g-4 mb-5 align-items-start">
+                    <!-- Columna: logo y descripción de la dependencia -->
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="mb-4">
+                            <img
+                                src="assets/img/logos/logo-pesca.png"
+                                alt="Logo SPyAP"
+                                class="footer-logo-img"
+                            />
+                        </div>
+                        <p class="footer-desc">
+                            Secretaría de Pesca y Acuacultura del Pueblo.
+                            <span class="footer-desc-sub">
+                                Gobierno del Estado de Chiapas <br />
+                                Administración 2024-2030
+                            </span>
+                        </p>
+                    </div>
+
+                    <!-- Columna: menú de navegación rápida -->
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <h5 class="footer-col-title">Navegación</h5>
+                        <ul class="list-unstyled footer-nav-list">
+                            <li class="mb-2">
+                                <a href="/conocenos" class="footer-nav-link"
+                                    >Conócenos</a
+                                >
+                            </li>
+                            <li class="mb-2">
+                                <a href="/boletines" class="footer-nav-link"
+                                    >Gobernador</a
+                                >
+                            </li>
+                            <li class="mb-2">
+                                <a href="/transparencia" class="footer-nav-link"
+                                    >Transparencia</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Columna: dirección y teléfono de contacto -->
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <h5 class="footer-col-title">Ubicación y contacto</h5>
+                        <p class="footer-contact-text">
+                            Calle Juan José Calzada No. 470, <br />
+                            Fracc. Jardines de Tonalá C.P. 30500 <br />
+                            <strong class="d-block mt-2"
+                                >Tonalá, Chiapas</strong
+                            >
+                            <span class="footer-phone d-block mt-1"
+                                >Conmutador: (966) 66 347 20</span
+                            >
+                        </p>
+                    </div>
+
+                    <!-- Columna: nombre del gobernador y redes sociales -->
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="footer-gov-card">
+                            <h5 class="footer-gov-label">
+                                Gobernador del Estado de Chiapas
+                            </h5>
+                            <p class="footer-gov-name">
+                                Dr. Eduardo Ramírez Aguilar
+                            </p>
+
+                            <!-- Botones de redes sociales -->
+                            <div class="d-flex justify-content-center gap-2">
+                                <!-- Facebook -->
+                                <a
+                                    href="https://www.facebook.com/EduardoRamirezGobernador"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="footer-social-btn footer-social-facebook"
+                                    aria-label="Facebook del Gobernador"
+                                >
+                                    <svg
+                                        width="20"
+                                        height="20"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            d="M9 8H6v4h3v12h5V12h3.6l.4-4h-4V6.3c0-1.1.3-1.6 1.5-1.6H18V0h-3.8C10.5 0 9 1.6 9 4.8V8z"
+                                        />
+                                    </svg>
+                                </a>
+
+                                <!-- X (Twitter) -->
+                                <a
+                                    href="https://x.com/ramirezlalo_"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="footer-social-btn footer-social-x"
+                                    aria-label="X (Twitter) del Gobernador"
+                                >
+                                    <svg
+                                        width="18"
+                                        height="18"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                                        />
+                                    </svg>
+                                </a>
+
+                                <!-- Instagram -->
+                                <a
+                                    href="https://www.instagram.com/ramirezlalo_"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="footer-social-btn footer-social-instagram"
+                                    aria-label="Instagram del Gobernador"
+                                >
+                                    <svg
+                                        width="20"
+                                        height="20"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                                        />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- ════════════════════════════════════════════════════════
+             SCRIPTS
+        ════════════════════════════════════════════════════════ -->
+
+        <!-- Bootstrap 5 JS Bundle (incluye Popper) -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Toggle del menú móvil del topbar -->
+        <script>
+            (function () {
+                var btn = document.getElementById("topbar-toggle");
+                var links = document.getElementById("topbar-links");
+                if (!btn || !links) return;
+                btn.addEventListener("click", function () {
+                    var expanded = btn.getAttribute("aria-expanded") === "true";
+                    btn.setAttribute("aria-expanded", String(!expanded));
+                    links.classList.toggle("topbar-links--open");
+                });
+            })();
+        </script>
+
+        <!-- Script: activación de sonido del video institucional -->
+        <script src="assets/js/video.js"></script>
+    </body>
+</html>

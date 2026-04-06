@@ -1,0 +1,1047 @@
+/* ─────────────────────────────────────────────────────────
+   FUENTES PERSONALIZADAS
+───────────────────────────────────────────────────────── */
+@font-face {
+    font-family: "Gilroy";
+    src:
+        url("../fonts/Gilroy-Medium.woff2") format("woff2"),
+        url("../fonts/Gilroy-Medium.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Gilroy";
+    src:
+        url("../fonts/Gilroy-Light.woff2") format("woff2"),
+        url("../fonts/Gilroy-Light.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Gilroy";
+    src:
+        url("../fonts/Gilroy-SemiBold.woff2") format("woff2"),
+        url("../fonts/Gilroy-SemiBold.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Gilroy";
+    src:
+        url("../fonts/Gilroy-Bold.woff2") format("woff2"),
+        url("../fonts/Gilroy-Bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Gilroy";
+    src:
+        url("../fonts/Gilroy-ExtraBold.woff2") format("woff2"),
+        url("../fonts/Gilroy-ExtraBold.woff") format("woff");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ─────────────────────────────────────────────────────────
+   VARIABLES Y BASE
+───────────────────────────────────────────────────────── */
+:root {
+    /* Colores principales */
+    --pantonep23-2c: #d3c2b4;
+    --verde: #009885;
+    --verde-dark: #007a6d;
+    --verde-menu: #007a6d;
+    --amarillo: #e6a817;
+    --negro: #0c0206;
+    --topbar-bg: #000000;
+
+    /* Grises — centralizados */
+    --gris-bg: #f6f6f6;
+    --gris-texto: #585f69;
+    --gris-texto-2: #666666;
+    --gris-suave: #555555;
+    --gris-titulo: #222222;
+    --gris-borde: #dddddd;
+
+    /* Fondos especiales */
+    --amarillo-bg: #fffdf0;
+
+    /* Tipografía */
+    --fuente: Arial, Helvetica, sans-serif;
+    --fuente-nav: "Gilroy", Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fuente-nav);
+    font-size: 16px;
+    color: #333;
+    background: #fff;
+    margin: 0;
+}
+
+a {
+    color: var(--verde);
+}
+a:hover {
+    color: var(--verde-dark);
+}
+img {
+    max-width: 100%;
+}
+
+/* ─────────────────────────────────────────────────────────
+   1. TOPBAR GOBIERNO
+───────────────────────────────────────────────────────── */
+#topbar-gob {
+    background-color: var(--topbar-bg);
+    color: #fff;
+    position: relative;
+    z-index: 100;
+    width: 100%;
+}
+
+/* Fila interna: max-width + padding equivalentes a max-w-350 + px-4/px-8 */
+.topbar-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Marca: escudo + texto con separador vertical */
+.topbar-brand {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+.topbar-brand:hover {
+    color: #fff;
+    opacity: 0.85;
+}
+.topbar-brand img {
+    height: 36px;
+    width: auto;
+    display: block;
+}
+.topbar-brand-text {
+    margin-left: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    line-height: 1.2;
+    border-left: 1px solid #374151;
+    padding-left: 12px;
+    color: #fff;
+}
+
+/* Grupo derecho: links + búsqueda + hamburguesa */
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+/* Links de gobierno (ocultos en móvil por defecto) */
+.topbar-links {
+    display: none;
+    align-items: center;
+    gap: 24px;
+}
+.topbar-links a {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.topbar-links a:hover {
+    color: #fff;
+    text-decoration: underline;
+    text-decoration-color: var(--verde);
+    text-underline-offset: 4px;
+}
+
+/* Ícono de búsqueda */
+.topbar-search {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.topbar-search:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Botón hamburguesa (solo visible en móvil) */
+.topbar-hamburger {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    color: #fff;
+    padding: 4px;
+    cursor: pointer;
+    line-height: 1;
+}
+.topbar-hamburger:focus {
+    outline: 2px solid var(--verde);
+    outline-offset: 2px;
+}
+
+/* Menú móvil desplegado */
+.topbar-links--open {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #111;
+    padding: 12px 16px 16px;
+    z-index: 99;
+}
+.topbar-links--open a {
+    padding: 8px 0;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ─────────────────────────────────────────────────────────
+   2. NAVBAR PRINCIPAL
+───────────────────────────────────────────────────────── */
+.navbar-b001 {
+    /* !important necesario para sobreescribir Bootstrap */
+    background-color: var(--pantonep23-2c) !important;
+    font-family: var(--fuente-nav);
+    border-radius: 0;
+    padding: 0;
+    min-height: 65px;
+}
+.navbar-b001 .navbar-brand {
+    color: #000 !important;
+    font-family: var(--fuente-nav);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 16px 20px;
+}
+.navbar-b001 .navbar-brand:hover {
+    opacity: 0.85;
+}
+
+/* toggler */
+.navbar-b001 .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+    padding: 6px 10px;
+}
+.navbar-b001 .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255%2C255%2C255%2C0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* links */
+.navbar-b001 .navbar-nav .nav-link {
+    color: rgba(0, 0, 0, 0.9);
+    font-family: var(--fuente-nav);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 8px 18px;
+    margin: 8px 4px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+.navbar-b001 .navbar-nav .nav-link:hover,
+.navbar-b001 .navbar-nav .nav-link:focus {
+    background-color: var(--verde);
+    color: #fff;
+}
+
+/* dropdown */
+.navbar-b001 .dropdown-menu {
+    background-color: var(--verde);
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    padding: 4px 4px;
+    margin-top: 0;
+}
+.navbar-b001 .dropdown-item {
+    color: rgba(255, 255, 255, 0.88);
+    font-family: var(--fuente-nav);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 18px;
+}
+.navbar-b001 .dropdown-item:hover,
+.navbar-b001 .dropdown-item:focus {
+    border-radius: 50px;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+.navbar-b001 .dropdown-toggle::after {
+    border-top-color: rgba(255, 255, 255, 0.9);
+}
+
+/* ─────────────────────────────────────────────────────────
+   3. BANNER
+───────────────────────────────────────────────────────── */
+#banner {
+    width: 100%;
+    line-height: 0;
+    position: relative;
+}
+#banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+#banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 60%,
+        rgba(12, 2, 6, 0.4)
+    );
+    pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────────────────
+   4. SECCIÓN TÍTULO
+───────────────────────────────────────────────────────── */
+.seccion-divisor {
+    margin: 48px 0 18px;
+}
+.seccion-titulo {
+    margin: 28px 0 18px;
+}
+.seccion-titulo h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--verde);
+    border-bottom: 3px solid var(--verde);
+    padding-bottom: 7px;
+    display: inline-block;
+    margin: 0;
+}
+
+/* ─────────────────────────────────────────────────────────
+   5. CARRUSEL DE BOLETINES
+───────────────────────────────────────────────────────── */
+#carrusel-boletines {
+    height: 600px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+#carrusel-boletines .carousel-inner,
+#carrusel-boletines .carousel-item,
+#carrusel-boletines .carousel-item img {
+    height: 600px;
+    object-fit: cover;
+}
+
+/* Indicadores tipo punto */
+#carrusel-boletines .carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border-top: none;
+    border-bottom: none;
+    background-color: #fff;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+#carrusel-boletines .carousel-indicators .active {
+    opacity: 1;
+}
+
+/* ─────────────────────────────────────────────────────────
+   6. TARJETAS
+───────────────────────────────────────────────────────── */
+.card-item {
+    border: 1px solid var(--gris-borde);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    transition:
+        box-shadow 0.2s,
+        transform 0.2s;
+    background: #fff;
+    height: 100%;
+}
+.card-item:hover {
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.13);
+    transform: translateY(-3px);
+}
+.card-item .card-img-top {
+    width: 100%;
+    height: 185px;
+    object-fit: cover;
+    display: block;
+}
+.card-item .card-body {
+    padding: 16px 18px 18px;
+}
+.card-item .card-body h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--verde);
+    margin: 0 0 6px;
+}
+.card-item .card-body p {
+    font-size: 13px;
+    color: var(--gris-texto-2);
+    margin: 0 0 12px;
+    line-height: 1.5;
+}
+.btn-ver {
+    display: inline-block;
+    background: var(--verde);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.btn-ver:hover {
+    background: var(--verde-dark);
+    color: #fff;
+    text-decoration: none;
+}
+
+/* ─────────────────────────────────────────────────────────
+   7. ENLACES DE INTERÉS
+───────────────────────────────────────────────────────── */
+#enlaces {
+    background: var(--gris-bg);
+    padding: 30px 0 36px;
+    margin-top: 10px;
+}
+#enlaces h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--verde);
+    border-bottom: 2px solid var(--verde);
+    padding-bottom: 8px;
+    margin-bottom: 22px;
+    margin-top: 0;
+}
+.enlace-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid var(--gris-borde);
+    border-radius: 20px;
+    padding: 12px 8px 10px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--gris-suave);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.3;
+    min-height: 100px;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        color 0.2s;
+}
+.enlace-card:hover {
+    border-color: var(--verde);
+    box-shadow: 0 2px 10px rgba(0, 152, 135, 0.15);
+    color: var(--verde);
+    text-decoration: none;
+}
+.enlace-card img {
+    max-height: 44px;
+    max-width: 86px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 7px;
+    transition: transform 0.2s;
+}
+.enlace-card:hover img {
+    transform: scale(1.05);
+}
+
+/* ─────────────────────────────────────────────────────────
+   8. FOOTER
+───────────────────────────────────────────────────────── */
+#footer-principal {
+    background-color: var(--negro);
+    background-image:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)),
+        url("../img/banners/banner-footer.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+    position: relative;
+}
+
+/* Contenedor principal del footer */
+.footer-wrap {
+    position: relative;
+    z-index: 1;
+}
+
+/* Logo */
+.footer-logo-img {
+    max-height: 64px;
+    opacity: 0.75;
+    filter: brightness(0) invert(1);
+}
+
+/* Descripción */
+.footer-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    opacity: 0.75;
+    font-weight: 500;
+}
+.footer-desc-sub {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    opacity: 0.5;
+}
+
+/* Títulos de columna */
+.footer-col-title {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    display: inline-block;
+}
+
+/* Navegación en footer */
+.footer-nav-list {
+    font-size: 14px;
+    font-weight: 500;
+}
+.footer-nav-link {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.footer-nav-link:hover {
+    color: #ffc107;
+}
+
+/* Contacto */
+.footer-contact-text {
+    font-size: 14px;
+    font-weight: 500;
+}
+.footer-phone {
+    font-size: 13px;
+    opacity: 0.5;
+}
+
+/* Tarjeta del gobernador */
+.footer-gov-card {
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    text-align: center;
+}
+.footer-gov-label {
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--verde);
+    letter-spacing: -0.02rem;
+    margin-bottom: 4px;
+}
+.footer-gov-name {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* Botones de redes sociales */
+.footer-social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 6px;
+    color: #fff;
+    transition: transform 0.2s;
+    text-decoration: none;
+}
+.footer-social-btn:hover {
+    transform: translateY(-4px);
+    color: #fff;
+}
+.footer-social-facebook {
+    background-color: #1877f2;
+}
+.footer-social-x {
+    background-color: #111;
+    border: 1px solid #444;
+}
+.footer-social-instagram {
+    background: linear-gradient(45deg, #f9ce34, #ee2a7b, #6228d7);
+}
+.footer-social-tiktok {
+    background-color: #111;
+    border: 1px solid #444;
+}
+/* ─────────────────────────────────────────────────────────
+   9. AVISO OFICIAL
+───────────────────────────────────────────────────────── */
+.aviso-oficial {
+    background: var(--amarillo-bg);
+    border-left: 5px solid var(--amarillo);
+    padding: 16px 20px;
+    margin-bottom: 26px;
+}
+.aviso-tag {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--amarillo);
+    margin-bottom: 5px;
+}
+.aviso-oficial h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gris-titulo);
+    margin: 0 0 7px;
+}
+.aviso-oficial p {
+    font-size: 13px;
+    color: var(--gris-suave);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ─────────────────────────────────────────────────────────
+   10. UTILIDADES PERSONALIZADAS
+───────────────────────────────────────────────────────── */
+.hover-accent:hover {
+    color: #ffc107 !important;
+    transition: color 0.3s;
+}
+.transform-hover:hover {
+    transform: translateY(-4px);
+    transition: transform 0.3s;
+}
+.fw-black {
+    font-weight: 900;
+}
+.ls-widest {
+    letter-spacing: 0.1em;
+}
+/* ─────────────────────────────────────────────────────────
+   11. PARALLAX
+───────────────────────────────────────────────────────── */
+#seccion-parallax {
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+}
+
+/* Capa de imagen con efecto parallax */
+.parallax-inner {
+    background-image: url("../img/resources/parallax.jpg");
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Capa de contenido centrado sobre la imagen */
+.parallax-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    gap: 1rem;
+}
+
+.parallax-content h1 {
+    font-weight: 800;
+    margin: 0;
+}
+
+/* ─────────────────────────────────────────────────────────
+   12. VIDEO INSTITUCIONAL
+───────────────────────────────────────────────────────── */
+.video-wrapper {
+    width: 100%;
+    max-width: 1296px;
+}
+
+.ratio-video {
+    --bs-aspect-ratio: 46.29%;
+}
+
+/* Selector acotado al contenedor para evitar conflictos globales */
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+}
+/* ─────────────────────────────────────────────────────────
+   13. SECCIÓN CONÓCENOS / BIENVENIDA
+───────────────────────────────────────────────────────── */
+
+/* Sección principal bienvenida */
+.conocenos-seccion {
+    padding: 48px 0 52px;
+    background: #fff;
+}
+
+/* Texto de los párrafos */
+.conocenos-texto {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--gris-texto);
+    text-align: justify;
+    margin-bottom: 16px;
+}
+.conocenos-texto strong {
+    color: var(--verde);
+    font-weight: 700;
+}
+
+/* Tarjeta de la titular */
+.conocenos-titular-card {
+    background: #fff;
+    border: 1px solid var(--gris-borde);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+/* Contenedor de imagen con difuminado inferior */
+.conocenos-titular-img-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+}
+.conocenos-titular-img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+}
+
+/* Nombre y cargo flotando sobre el difuminado */
+.conocenos-titular-info {
+    background-color: rgba(201, 1, 102, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari */
+    color: #fff;
+    padding: 14px 16px 16px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+.conocenos-titular-nombre {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: var(--fuente-nav);
+    margin: 0 0 2px;
+    color: #fff;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+.conocenos-titular-cargo {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 400;
+    opacity: 0.88;
+    line-height: 1.4;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* ─────────────────────────────────────────────────────────
+   14. MISIÓN Y VISIÓN
+───────────────────────────────────────────────────────── */
+.mv-seccion {
+    background: var(--gris-bg);
+    padding: 40px 0 48px;
+}
+
+.mv-card {
+    border: 1px solid var(--gris-borde);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    height: 100%;
+}
+
+.mv-card-header {
+    background-color: var(--verde);
+    padding: 14px 22px;
+}
+.mv-card-header h3 {
+    font-size: 22px;
+    font-weight: 700;
+    font-family: var(--fuente-nav);
+    color: #fff;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.mv-card-body {
+    background: #fff url("../img/resources/myvback.jpg") no-repeat center center;
+    background-size: cover;
+    padding: 40px 24px;
+    height: 100%;
+}
+.mv-card-body p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--gris-texto);
+    text-align: justify;
+    margin: 0;
+}
+
+/* ─────────────────────────────────────────────────────────
+   14. CARRUSEL PARA BANNER INSTITUCIONALES
+───────────────────────────────────────────────────────── */
+#carrusel-documentos {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22);
+    aspect-ratio: 1400 / 320;
+}
+#carrusel-documentos .carousel-inner,
+#carrusel-documentos .carousel-item {
+    height: 100%;
+}
+
+.slide-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.7s ease;
+}
+#carrusel-documentos .carousel-item:hover .slide-bg {
+    transform: scale(1.05);
+}
+
+.slide-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(12, 2, 6, 0.9),
+        rgba(12, 2, 6, 0.4) 50%,
+        transparent
+    );
+}
+.slide-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 80px;
+}
+.slide-btn {
+    display: inline-block;
+    background: var(--verde);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.slide-btn:hover {
+    background: var(--verde-dark);
+    color: #fff;
+    text-decoration: none;
+}
+/* Estilo para el texto fijo sobre el slider */
+.texto-fijo-carousel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 152, 133, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    z-index: 10;
+    font-family: "Novecento Wide", sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+}
+/* Opcional: Ajustar los indicadores para que no choquen con el texto */
+.carousel-indicators {
+    bottom: 60px;
+}
+/* ─────────────────────────────────────────────────────────
+   VIÑETA
+───────────────────────────────────────────────────────── */
+.lista-svg {
+    list-style: none; /* Quitamos los puntos originales */
+    padding-left: 0;
+}
+
+.lista-svg li {
+    position: relative;
+    padding-left: 30px; /* Espacio para el icono */
+    margin-bottom: 12px;
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+.lista-svg li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    /* Tu imagen convertida a código CSS */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220"><g transform="translate(0,220) scale(0.1,-0.1)" fill="%23009783"><path d="M550 1635 l-545-545 545-545 545-545 547 547 548 548-542 542c-299 299-545 543-548 543-3 0-250-245-550-545z m840-257 l285-288-288-288-287-287-290 290-290 290 287 287c159 159 290 287 293 286 3 0 133-131 290-290z"/><path d="M990 1335 l0-135-135 0-135 0 0-105 0-105 135 0 135 0 0-135 0-135 111 0 112 0-4 133-4 132 133 3 132 3 0 104 0 105-134 0-135 0 2 133 2 132-107 3-108 3 0-136z"/></g></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+/* ─────────────────────────────────────────────────────────
+   BANNER
+───────────────────────────────────────────────────────── */
+.banner-wrapper {
+    position: relative;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    border: 1px solid #eee;
+}
+
+.banner-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(
+        0,
+        151,
+        131,
+        0.1
+    ); /* Verde institucional muy transparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.banner-overlay span {
+    background: #009783;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-family: sans-serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.banner-wrapper:hover .banner-overlay {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .banner-overlay {
+        display: none; /* Desactivar overlay en móviles para no estorbar la lectura */
+    }
+}
+/* ─────────────────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────────────────── */
+@media (min-width: 992px) {
+    /* lg: mostrar links y ocultar hamburguesa */
+    .topbar-links {
+        display: flex !important;
+    }
+    .topbar-hamburger {
+        display: none;
+    }
+    /* Ajuste de padding horizontal en pantallas grandes */
+    .topbar-inner {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    #seccion-parallax {
+        height: 250px;
+    }
+}
