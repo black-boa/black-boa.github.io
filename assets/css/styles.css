@@ -296,6 +296,15 @@ img {
     font-size: 13px;
     font-weight: 600;
     padding: 8px 18px;
+    border-radius: 16px;
+}
+.navbar-b001 .dropdown-menu .dropdown-item.active {
+    --bs-dropdown-link-active-bg: var(--verde-dark);
+    --bs-dropdown-link-active-color: #ffffff;
+
+    /* Forzamos el uso de las variables que acabamos de declarar arriba */
+    background-color: var(--bs-dropdown-link-active-bg);
+    color: var(--bs-dropdown-link-active-color);
 }
 .navbar-b001 .dropdown-item:hover,
 .navbar-b001 .dropdown-item:focus {
@@ -305,12 +314,6 @@ img {
 }
 .navbar-b001 .dropdown-toggle::after {
     border-top-color: rgba(255, 255, 255, 0.9);
-}
-.navbar-b001 .dropdown-item.active {
-    background-color: transparent;
-    color: var(
-        --bs-dropdown-link-color
-    ); /* Mantiene el color de texto normal */
 }
 /* ─────────────────────────────────────────────────────────
    3. BANNER
