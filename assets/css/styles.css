@@ -296,6 +296,7 @@ img {
     font-size: 13px;
     font-weight: 600;
     padding: 8px 18px;
+    border-radius: 16px;
 }
 .navbar-b001 .dropdown-menu .dropdown-item.active {
     --bs-dropdown-link-active-bg: #6c757d;
