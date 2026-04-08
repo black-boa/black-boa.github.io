@@ -282,46 +282,31 @@ img {
 }
 
 /* dropdown */
-/* 1. Aseguramos que el contenedor recorte cualquier fondo que se salga */
 .navbar-b001 .dropdown-menu {
     background-color: var(--verde);
     border: none;
     border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    padding: 6px; /* Un poquito más de aire para que los items respiren */
+    padding: 4px 4px;
     margin-top: 0;
-    overflow: hidden; /* <--- CRUCIAL: Corta el azul/gris si intenta salirse */
 }
-
-/* 2. Estilo base de los items */
 .navbar-b001 .dropdown-item {
     color: rgba(255, 255, 255, 0.88);
     font-family: var(--fuente-nav);
     font-size: 13px;
     font-weight: 600;
     padding: 8px 18px;
-    border-radius: 16px; /* Esto les da la forma redondeada */
-    transition: all 0.2s ease; /* Para que el cambio de color sea suave */
 }
-
-/* 3. CORRECCIÓN DEL ARTEFACTO (Estado Activo) */
-/* Usamos un selector más específico para anular a Bootstrap */
-.navbar-b001 .dropdown-menu .dropdown-item.active,
-.navbar-b001 .dropdown-menu .dropdown-item:active {
-    background-color: #6c757d !important; /* Forzamos tu gris */
-    color: #ffffff !important;
-    border-radius: 16px; /* Aseguramos que mantenga la redondez */
-}
-
-/* 4. Hover y Focus (Consistencia) */
 .navbar-b001 .dropdown-item:hover,
 .navbar-b001 .dropdown-item:focus {
+    border-radius: 50px;
     background-color: rgba(0, 0, 0, 0.2);
     color: #fff;
-    /* Quitamos el 50px si quieres que sea igual al activo (16px)
-       o lo dejamos si buscas ese efecto de cápsula */
-    border-radius: 16px;
 }
+.navbar-b001 .dropdown-toggle::after {
+    border-top-color: rgba(255, 255, 255, 0.9);
+}
+
 /* ─────────────────────────────────────────────────────────
    3. BANNER
 ───────────────────────────────────────────────────────── */
