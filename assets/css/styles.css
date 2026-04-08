@@ -289,6 +289,8 @@ img {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     padding: 4px 4px;
     margin-top: 0;
+    --bs-dropdown-link-active-bg: #6c757d; /* Cambia esto por tu color deseado */
+    --bs-dropdown-link-active-color: #ffffff; /* Asegúrate de que el texto sea legible */
 }
 .navbar-b001 .dropdown-item {
     color: rgba(255, 255, 255, 0.88);
@@ -305,12 +307,6 @@ img {
 }
 .navbar-b001 .dropdown-toggle::after {
     border-top-color: rgba(255, 255, 255, 0.9);
-}
-.navbar-b001 .dropdown-item.active {
-    background-color: transparent;
-    color: var(
-        --bs-dropdown-link-color
-    ); /* Mantiene el color de texto normal */
 }
 /* ─────────────────────────────────────────────────────────
    3. BANNER
