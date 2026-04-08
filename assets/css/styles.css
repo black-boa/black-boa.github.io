@@ -306,7 +306,12 @@ img {
 .navbar-b001 .dropdown-toggle::after {
     border-top-color: rgba(255, 255, 255, 0.9);
 }
-
+.navbar-b001 .dropdown-item.active {
+    background-color: transparent;
+    color: var(
+        --bs-dropdown-link-color
+    ); /* Mantiene el color de texto normal */
+}
 /* ─────────────────────────────────────────────────────────
    3. BANNER
 ───────────────────────────────────────────────────────── */
