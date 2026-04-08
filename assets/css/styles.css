@@ -380,7 +380,6 @@ img {
 #carrusel-boletines .carousel-indicators .active {
     opacity: 1;
 }
-
 /* ─────────────────────────────────────────────────────────
    6. TARJETAS
 ───────────────────────────────────────────────────────── */
@@ -785,7 +784,7 @@ img {
 
 /* Nombre y cargo flotando sobre el difuminado */
 .conocenos-titular-info {
-    background-color: rgba(201, 1, 102, 0.75);
+    background-color: rgba(201, 1, 102, 0.5);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px); /* Safari */
     color: #fff;
@@ -967,6 +966,7 @@ img {
     background-size: contain;
     background-repeat: no-repeat;
 }
+
 /* ─────────────────────────────────────────────────────────
    BANNER
 ───────────────────────────────────────────────────────── */
@@ -1043,5 +1043,36 @@ img {
 @media (max-width: 768px) {
     #seccion-parallax {
         height: 250px;
+    }
+}
+/* ── Responsive: carrusel de boletines ── */
+@media (max-width: 991.98px) {
+    /* tablet y abajo */
+    #carrusel-boletines,
+    #carrusel-boletines .carousel-inner,
+    #carrusel-boletines .carousel-item,
+    #carrusel-boletines .carousel-item img {
+        height: 380px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    /* móvil pequeño */
+    #carrusel-boletines,
+    #carrusel-boletines .carousel-inner,
+    #carrusel-boletines .carousel-item,
+    #carrusel-boletines .carousel-item img {
+        height: 220px;
+    }
+
+    /* El texto fijo también necesita reducirse */
+    .texto-fijo-carousel {
+        font-size: 1rem;
+        padding: 6px 8px;
+    }
+
+    /* Subir los indicadores para que no tapen el texto */
+    #carrusel-boletines .carousel-indicators {
+        bottom: 45px;
     }
 }
