@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /assets/
+
+Sitemap: https://spyap.chiapas.gob.mx/sitemap.xml
