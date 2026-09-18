@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control de Folios - Liberador Superior</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Contenedor de toasts -->
+  <div id="toast-container"></div>
+
+  <nav class="navbar-asiste">
+    <div class="logo-icon">📄</div>
+    <a class="navbar-brand" href="dashboard-liberador-superior.html">
+      <span>
+        <span class="brand-title d-block">Control de Folios</span>
+        <span class="brand-subtitle">SPyAP · Liberador Superior</span>
+      </span>
+    </a>
+    <div class="user-info">
+      <div class="navbar-user">
+        <div class="navbar-avatar-iniciales" id="avatar-iniciales"></div>
+        <div class="navbar-user-info">
+          <span class="navbar-user-nombre" id="nombre-usuario"></span>
+          <span class="navbar-user-area" id="area-usuario"></span>
+          <span class="rol-badge" id="rol-badge"></span>
+        </div>
+      </div>
+      <button class="btn-logout" onclick="cerrarSesion()">Cerrar sesión</button>
+    </div>
+  </nav>
+
+  <div class="container-admin pt-4 pb-4">
+    <h1 class="page-title">Liberar Oficio - Oficina de la Secretaría</h1>
+
+    <div class="card-asiste">
+      <div class="card-header-asiste">
+        <h3 class="card-title-asiste">Nueva liberación de folio</h3>
+      </div>
+      <p class="page-subtitle">Puede liberar números de oficio para cualquier área de la dependencia. El sistema generará el folio automáticamente.</p>
+
+      <form id="formLiberar">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label class="form-label">Tipo de Oficio</label>
+            <select class="form-select" id="tipo-oficio">
+              <option value="oficio">Oficio</option>
+              <option value="memorandum">Memorandum</option>
+              <option value="circular">Circular</option>
+              <option value="incidencias">Incidencias</option>
+              <option value="memorandum_comision">Memorandum de Comisión</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Área Destinataria</label>
+            <select class="form-select" id="area-destino"></select>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <label class="form-label">Asunto del Oficio</label>
+            <input type="text" class="form-control" id="asunto-oficio" placeholder="Ej: Solicitud de recursos para..." required>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <label class="form-label">Fecha del Documento</label>
+            <input type="date" class="form-control" id="fecha-documento" required>
+            <small class="text-secondary">*Ingrese la fecha que llevará el oficio (puede ser diferente a la fecha de solicitud)</small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <label class="form-label">Solicitante <span class="text-secondary small">(nombre o número de empleado · opcional)</span></label>
+            <input type="text" class="form-control" id="solicitante-nombre" placeholder="Ej: Juan Pérez o SOL-001">
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 mt-4">
+          <button type="submit" class="btn btn-asiste-primary btn-lg">Liberar Oficio y Generar Folio</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card-asiste">
+      <div class="card-header-asiste">
+        <h3 class="card-title-asiste">Folios liberados recientemente</h3>
+          <span class="badge text-primario">Total: <span id="total-liberados">0</span></span>
+        </div>
+        <div class="table-responsive">
+          <table class="table-asiste">
+            <thead>
+              <tr>
+                <th>Folio</th>
+                <th>Tipo</th>
+                <th>Área</th>
+                <th>Asunto</th>
+                <th>Estatus</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-liberados"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Calendario de folios -->
+      <div class="card-asiste cal-folios-card">
+        <div class="card-header-asiste">
+          <h3 class="card-title-asiste">Calendario de folios por día</h3>
+        </div>
+        <div class="cal-folios-contenedor" id="calendario-folios"></div>
+      </div>
+    </div>
+
+  <footer class="footer-asiste">
+    Secretaría de Pesca y Acuacultura del Pueblo (SPyAP) · Control de Folios
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const session = sesionVigente({ permiso: 'liberar_oficio', mensaje: 'No tiene permiso para liberar oficios' });
+      if (!session) return;
+      pintarUsuario(session);
+      llenarSelectAreas('area-destino');
+      cargarLiberados();
+      renderCalendarioFolios('calendario-folios');
+
+      const form = document.getElementById('formLiberar');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const tipo = document.getElementById('tipo-oficio').value;
+        const areaSigla = document.getElementById('area-destino').value;
+        const asunto = document.getElementById('asunto-oficio').value.trim();
+        const fechaDoc = document.getElementById('fecha-documento').value;
+
+        if (!asunto) {
+          showToast('Capture el asunto del oficio', 'warning');
+          return;
+        }
+        if (!fechaDoc) {
+          showToast('Capture la fecha del documento', 'warning');
+          return;
+        }
+
+        const folio = liberarOficio(tipo, areaSigla, asunto, fechaDoc, session, 'solicitante-nombre');
+        if (!folio) {
+          showToast('Error al generar el folio', 'danger');
+          return;
+        }
+
+        showToast('Oficio liberado con folio: ' + folio, 'success');
+        form.reset();
+        cargarLiberados();
+        renderCalendarioFolios('calendario-folios');
+      });
+    });
+
+
+
+    function cargarLiberados() {
+      const oficios = getOficios();
+      const tbody = document.getElementById('tabla-liberados');
+      const totalSpan = document.getElementById('total-liberados');
+      let filas = [];
+
+      Object.keys(TIPOS_OFICIO).forEach(tipo => {
+        const tabla = TIPOS_OFICIO[tipo];
+        (oficios[tabla] || []).forEach(f => {
+          if (f.id_usuario_liberador) {
+            filas.push({ tabla, f });
+          }
+        });
+      });
+
+      filas.reverse();
+      tbody.innerHTML = '';
+      filas.slice(0, 20).forEach(({ tabla, f }) => {
+        const fecha = f.fecha_solicitud ? presentarFecha(f.fecha_solicitud) : 'N/A';
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${escapeHtml(f.folio)}</strong></td>
+          <td><span class="badge bg-primario text-capitalize">${escapeHtml(NOMBRES_OFICIO[tabla] || tabla)}</span></td>
+          <td>${escapeHtml(getAreaNameById(f.id_area))}</td>
+          <td>${escapeHtml(f.asunto ? f.asunto.substring(0, 40) : 'Sin asunto')}</td>
+          <td>${badgeEstatus(f.estatus)}</td>
+          <td>${fecha}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      if (filas.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center text-secondary">Aún no se liberan oficios</td></tr>`;
+      }
+      totalSpan.textContent = filas.length;
+    }
+
+  </script>
+</body>
+</html>

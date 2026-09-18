@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control de Folios - Solicitante</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Contenedor de toasts -->
+  <div id="toast-container"></div>
+
+  <nav class="navbar-asiste">
+    <div class="logo-icon">📄</div>
+    <a class="navbar-brand" href="dashboard-solicitante.html">
+      <span>
+        <span class="brand-title d-block">Control de Folios</span>
+        <span class="brand-subtitle">SPyAP · Solicitante</span>
+      </span>
+    </a>
+    <div class="user-info">
+      <div class="navbar-user">
+        <div class="navbar-avatar-iniciales" id="avatar-iniciales"></div>
+        <div class="navbar-user-info">
+          <span class="navbar-user-nombre" id="nombre-usuario"></span>
+          <span class="navbar-user-area" id="area-usuario"></span>
+          <span class="rol-badge" id="rol-badge"></span>
+        </div>
+      </div>
+      <button class="btn-logout" onclick="cerrarSesion()">Cerrar sesión</button>
+    </div>
+  </nav>
+
+  <div class="container-admin pt-4 pb-4">
+    <h1 class="page-title">Solicitar Número de Oficio</h1>
+
+    <div class="card-asiste">
+      <div class="card-header-asiste">
+        <h3 class="card-title-asiste">Nueva solicitud</h3>
+      </div>
+      <p class="page-subtitle">Complete el formulario para solicitar un número de folio. El sistema generará la siguiente solicitud en la cadena correspondiente.</p>
+
+      <form id="formSolicitar">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label class="form-label">Tipo de Oficio</label>
+            <select class="form-select" id="tipo-oficio-solicitante">
+              <option value="oficio">Oficio</option>
+              <option value="memorandum">Memorandum</option>
+              <option value="circular">Circular</option>
+              <option value="incidencias">Incidencias</option>
+              <option value="memorandum_comision">Memorandum de Comisión</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Área Destino</label>
+            <select class="form-select" id="area-destino-solicitante"></select>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <label class="form-label">Asunto del Oficio</label>
+            <input type="text" class="form-control" id="asunto-solicitante" placeholder="Ej: Solicitud de recursos para equipo de cómputo" required>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <label class="form-label">Fecha del Documento</label>
+            <input type="date" class="form-control" id="fecha-documento-solicitante" required>
+            <small class="text-secondary">*Fecha que llevará el oficio una vez liberado</small>
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 mt-4">
+          <button type="submit" class="btn btn-asiste-primary btn-lg">Solicitar número de Oficio</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card-asiste">
+      <div class="card-header-asiste">
+        <h3 class="card-title-asiste">Mis solicitudes</h3>
+        <span class="badge text-primario">Total: <span id="total-solicitudes">0</span></span>
+      </div>
+      <div class="table-responsive">
+        <table class="table-asiste">
+          <thead>
+            <tr>
+              <th>Folio</th>
+              <th>Tipo</th>
+              <th>Área</th>
+              <th>Asunto</th>
+              <th>Fecha Solicitud</th>
+              <th>Estatus</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-solicitudes"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Calendario de folios -->
+    <div class="card-asiste cal-folios-card">
+      <div class="card-header-asiste">
+        <h3 class="card-title-asiste">Calendario de folios por día</h3>
+      </div>
+      <div class="cal-folios-contenedor" id="calendario-folios"></div>
+    </div>
+  </div>
+
+  <footer class="footer-asiste">
+    Secretaría de Pesca y Acuacultura del Pueblo (SPyAP) · Control de Folios
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const session = sesionVigente({ permiso: 'solicitar_oficio', mensaje: 'No tiene permiso para solicitar oficios' });
+      if (!session) return;
+      pintarUsuario(session);
+      llenarSelectAreas('area-destino-solicitante');
+      cargarSolicitudes();
+      renderCalendarioFolios('calendario-folios');
+
+      const form = document.getElementById('formSolicitar');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const tipo = document.getElementById('tipo-oficio-solicitante').value;
+        const areaSigla = document.getElementById('area-destino-solicitante').value;
+        const asunto = document.getElementById('asunto-solicitante').value.trim();
+        const fechaDoc = document.getElementById('fecha-documento-solicitante').value;
+
+        if (!asunto) {
+          showToast('Capture el asunto del oficio', 'warning');
+          return;
+        }
+        if (!fechaDoc) {
+          showToast('Capture la fecha del documento', 'warning');
+          return;
+        }
+
+        const folio = generarFolioAutomatico(tipo, areaSigla);
+        if (!folio) {
+          showToast('Error al generar la solicitud', 'danger');
+          return;
+        }
+
+        const tabla = TIPOS_OFICIO[tipo];
+        const tablas = getOficios();
+        if (!tablas[tabla]) tablas[tabla] = [];
+
+        tablas[tabla].push({
+          folio: folio,
+          tipo_oficio: tipo,
+          id_area: getAreaIdBySigla(areaSigla),
+          asunto: asunto,
+          fecha_documento: fechaDoc,
+          fecha_solicitud: new Date().toISOString(),
+          id_usuario_solicitante: session.id,
+          nombre_solicitante: session.nombre,
+          estatus: 'Pendiente',
+          anio: new Date().getFullYear()
+        });
+        guardarOficios(tablas);
+
+        showToast('Solicitud registrada con folio: ' + folio, 'success');
+        form.reset();
+        cargarSolicitudes();
+        renderCalendarioFolios('calendario-folios');
+      });
+    });
+
+
+
+    function cargarSolicitudes() {
+      const oficios = getOficios();
+      const tbody = document.getElementById('tabla-solicitudes');
+      const totalSpan = document.getElementById('total-solicitudes');
+      const usuarioActual = getSession() ? getSession().id : null;
+      let filas = [];
+
+      const tipos = TODAS_LAS_TABLAS;
+      tipos.forEach(tabla => {
+        (oficios[tabla] || []).forEach(f => {
+          if (usuarioActual && f.id_usuario_solicitante === usuarioActual) {
+            filas.push({ tabla, f });
+          }
+        });
+      });
+
+      filas.reverse();
+      tbody.innerHTML = '';
+      filas.forEach(({ tabla, f }) => {
+        const fecha = f.fecha_solicitud ? presentarFecha(f.fecha_solicitud) : 'N/A';
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${escapeHtml(f.folio)}</strong></td>
+          <td><span class="badge bg-primario text-capitalize">${escapeHtml(NOMBRES_OFICIO[tabla] || tabla)}</span></td>
+          <td>${escapeHtml(getAreaNameById(f.id_area))}</td>
+          <td>${escapeHtml(f.asunto ? f.asunto.substring(0, 30) : 'Sin asunto')}</td>
+          <td>${fecha}</td>
+          <td>${badgeEstatus(f.estatus)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      if (filas.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center text-secondary">No tiene solicitudes previas</td></tr>`;
+      }
+      totalSpan.textContent = filas.length;
+    }
+
+  </script>
+</body>
+</html>
