@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control de Correspondencia - Foliador de Secretaría</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Contenedor de toasts -->
+  <div id="toast-container" class="toast-container"></div>
+  <!-- Sugerencias de solicitantes (autocompletado) -->
+  <datalist id="lista-solicitantes"></datalist>
+
+  <nav class="navbar-asiste">
+    <div class="logo-icon"><i class="bi bi-folder2-open" aria-hidden="true"></i></div>
+    <a class="navbar-brand" href="dashboard-asignador-superior.html">
+      <span>
+        <span class="brand-title d-block">Control de Correspondencia</span>
+        <span class="brand-subtitle">SPyAP · Foliador de Secretaría</span>
+      </span>
+    </a>
+    <div class="user-info">
+      <div class="navbar-user">
+        <div class="navbar-avatar-iniciales" id="avatar-iniciales"></div>
+        <div class="navbar-user-info">
+          <span class="navbar-user-nombre" id="nombre-usuario"></span>
+          <span class="navbar-user-area" id="area-usuario"></span>
+          <span class="rol-badge" id="rol-badge"></span>
+        </div>
+      </div>
+      <button class="btn-logout" onclick="cerrarSesion()"><i class="bi bi-box-arrow-right me-1" aria-hidden="true"></i>Cerrar sesión</button>
+    </div>
+  </nav>
+
+  <div class="container-admin pt-4 pb-4">
+    <h1 class="page-title">Oficina de la Secretaría</h1>
+
+    <div class="folios-preview-seccion">
+      <div class="fp-acento" aria-hidden="true"></div>
+      <div class="fp-header">
+        <div>
+          <h3 class="fp-titulo">Folios próximos por asignar</h3>
+          <p class="fp-subtitulo">Consulta el siguiente folio disponible para cada tipo de documento.</p>
+        </div>
+        <span class="fp-badge-ser" id="fp-serie-badge">Serie SPyAP</span>
+      </div>
+      <div class="folios-preview-grid" id="folios-preview" data-badge-id="fp-serie-badge" data-chips-id="tipo-oficio"></div>
+
+      <div class="fp-panel-form collapse" id="panel-asignar">
+        <div class="fp-panel-form-inner">
+          <div class="fp-panel-head">
+            <div>
+              <h3 class="fp-titulo">Nueva asignación de folio</h3>
+              <p class="fp-subtitulo">Asigna folios a nombre de la oficina de la secretaría. También recibe los avisos de las subsecretarías, direcciones, unidades y áreas y decide si les asigna el folio o les rechaza la solicitud.</p>
+            </div>
+          </div>
+
+          <form id="formAsignar">
+            <div class="row mb-3">
+              <div class="col-12">
+                <label class="form-label">Tipo de Oficio</label>
+                <div class="tipo-seleccionado" id="tipo-oficio" aria-label="Tipo de documento"></div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-7">
+                <label class="form-label">Área de folio (secretaría)</label>
+                <input type="text" class="form-control" id="area-destino" readonly>
+                <small class="text-secondary">Los folios de esta oficina se emiten siempre con la serie de la secretaría.</small>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label class="form-label">Asunto del Documento</label>
+                <input type="text" class="form-control" id="asunto-oficio" placeholder="Ej: Solicitud de recursos para..." required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Dirigido a</label>
+                <input type="text" class="form-control" id="dirigido-a" placeholder="Ej: Dirección General de Asuntos Jurídicos" required>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-12">
+                <label class="form-label">Solicitante <span class="text-secondary small">(nombre o número de empleado · opcional)</span></label>
+                <input type="text" class="form-control" id="solicitante-nombre" list="lista-solicitantes" placeholder="Ej: Juan Pérez o SOL-001">
+              </div>
+            </div>
+
+            <div class="asignacion-fecha-layout">
+              <section class="asignacion-calendario">
+                <div class="asignacion-seccion-titulo">
+                  <label class="form-label mb-0">Fecha del Documento</label>
+                  <span>Seleccione el día que llevará el oficio.</span>
+                </div>
+                <input type="date" id="fecha-documento" class="d-none" aria-hidden="true">
+                <div class="selector-fecha" id="selector-fecha-documento"></div>
+              </section>
+              <aside class="asignacion-resumen" aria-live="polite">
+                <span class="asignacion-resumen__eyebrow">Resumen de asignación</span>
+                <dl>
+                  <div><dt>Tipo</dt><dd id="resumen-tipo">Oficio</dd></div>
+                  <div><dt>Serie</dt><dd id="resumen-area">SPyAP</dd></div>
+                  <div><dt>Fecha</dt><dd id="resumen-fecha">—</dd></div>
+                </dl>
+                <p>Revise los datos antes de generar el folio.</p>
+                <div class="asignacion-acciones">
+                  <button type="submit" class="btn btn-asiste-primary"><i class="bi bi-check2-circle me-2" aria-hidden="true"></i>Asignar y generar folio</button>
+                  <button type="button" class="btn btn-asiste-secondary" onclick="cerrarPanelAsignar()">Cancelar</button>
+                </div>
+              </aside>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-asiste">
+      <div class="card-header-asiste">
+        <h3 class="card-title-asiste">Solicitudes por asignar</h3>
+        <span class="badge text-primario">Total: <span id="total-solicitudes-pendientes">0</span></span>
+      </div>
+      <div class="table-responsive">
+        <table class="table-asiste">
+          <thead>
+            <tr>
+              <th>Folio</th>
+              <th>Tipo</th>
+              <th>Área que solicita</th>
+              <th>Dirigido a</th>
+              <th>Asunto</th>
+              <th>Solicitante</th>
+              <th>Fecha</th>
+              <th class="text-end">Acción</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-solicitudes-pendientes"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card-asiste">
+      <div class="card-header-asiste">
+        <h3 class="card-title-asiste">Folios asignados de la Secretaría</h3>
+        <span class="badge text-primario">Total: <span id="total-asignados">0</span></span>
+      </div>
+      <div class="table-responsive">
+        <table class="table-asiste">
+          <thead>
+            <tr>
+              <th>Folio</th>
+              <th>Tipo</th>
+              <th>Área</th>
+              <th>Dirigido a</th>
+              <th>Asunto</th>
+              <th>Estatus</th>
+              <th>Fecha</th>
+              <th class="text-end">Acción</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-asignados"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Calendario de folios -->
+    <div class="card-asiste cal-folios-card">
+      <div class="card-header-asiste">
+        <h3 class="card-title-asiste">Calendario de folios por día</h3>
+      </div>
+      <div class="cal-folios-contenedor" id="calendario-folios"></div>
+    </div>
+  </div>
+
+  <footer class="footer-asiste">
+    Secretaría de Pesca y Acuacultura del Pueblo (SPyAP) · Control de Correspondencia
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const session = sesionVigente({ permiso: 'asignar_oficio', mensaje: 'No tiene permiso para asignar oficios' });
+      if (!session) return;
+      pintarUsuario(session);
+      poblarDatalistSolicitantes();
+
+      const selectArea = document.getElementById('area-destino');
+      selectArea.value = getAreaNameById(session.area) + ' (' + getSiglaByAreaId(session.area) + ')';
+      const actualizarResumen = () => {
+        const tipo = getTipoOficioChipSeleccionado('tipo-oficio');
+        document.getElementById('resumen-tipo').textContent = (TIPOS_DOCUMENTO_CHIP[tipo] || {}).label || tipo;
+        document.getElementById('resumen-area').textContent = getSiglaByAreaId(session.area) || 'SPyAP';
+      };
+      renderTipoOficioFijo('tipo-oficio', 'oficio', actualizarResumen);
+      crearSelectorFecha({
+        contenedorId: 'selector-fecha-documento',
+        inputId: 'fecha-documento',
+        onCambio: fecha => { document.getElementById('resumen-fecha').textContent = presentarFecha(fecha); }
+      });
+      actualizarResumen();
+      document.getElementById('resumen-fecha').textContent = presentarFecha(document.getElementById('fecha-documento').value);
+      renderProximosFolios('folios-preview', session.area);
+
+      window.__refrescarTablas = function() {
+        renderProximosFolios('folios-preview', session.area);
+        renderSolicitudesPendientes('tabla-solicitudes-pendientes', 'total-solicitudes-pendientes', session.area);
+        renderAsignadosDe('tabla-asignados', 'total-asignados', session.area);
+        renderCalendarioFolios('calendario-folios');
+      };
+      window.__refrescarTablas();
+
+      const form = document.getElementById('formAsignar');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const tipo = getTipoOficioChipSeleccionado('tipo-oficio');
+        const areaSigla = getSiglaByAreaId(session.area);
+        const asunto = document.getElementById('asunto-oficio').value.trim();
+        const dirigido = document.getElementById('dirigido-a').value.trim();
+        const fechaDoc = document.getElementById('fecha-documento').value;
+
+        if (!asunto) {
+          showToast('Capture el asunto del oficio', 'warning');
+          return;
+        }
+        if (!dirigido) {
+          showToast('Capture a quién va dirigido el oficio', 'warning');
+          return;
+        }
+        if (!fechaDoc) {
+          showToast('Capture la fecha del documento', 'warning');
+          return;
+        }
+
+        const folio = asignarOficio(tipo, areaSigla, asunto, fechaDoc, session, 'solicitante-nombre', dirigido);
+        if (!folio) {
+          showToast('Error al generar el folio', 'danger');
+          return;
+        }
+
+        showToast('Oficio asignado con folio: ' + folio, 'success', {
+          detalle: 'El registro ya está disponible en la tabla de folios asignados.',
+          accion: {
+            etiqueta: 'Ver folios asignados',
+            onClick: () => document.getElementById('tabla-asignados').closest('.card-asiste').scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }
+        });
+        form.reset();
+        document.getElementById('area-destino').value = getAreaNameById(session.area) + ' (' + getSiglaByAreaId(session.area) + ')';
+        restablecerSelectorFecha('selector-fecha-documento');
+        setTipoOficioChip('tipo-oficio', 'oficio');
+        actualizarResumen();
+        window.__refrescarTablas();
+      });
+    });
+  </script>
+</body>
+</html>
